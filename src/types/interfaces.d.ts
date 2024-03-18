@@ -26,6 +26,10 @@ export interface MovieT extends BaseMovie {
     id: number;
     name: string;
   }[];
+  production_countries: {
+    iso_3166_1: string;
+    name: string;
+  }[];
 }
 
 export interface MovieImage {
