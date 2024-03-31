@@ -6,6 +6,9 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import HomeIcon from "@mui/icons-material/Home";
 import { MovieT } from "../../types/interfaces";
+import { useParams } from "react-router-dom";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import Avatar from "@mui/material/Avatar";
 
 const styles = {
   root: {
@@ -15,15 +18,26 @@ const styles = {
     flexWrap: "wrap",
     padding: 1.5,
   },
+  avatar: {
+    backgroundColor: "rgb(255, 0, 0)",
+  },
 };
 
 const MovieHeader: React.FC<MovieT> = (props) => {
+  const { id } = useParams();
+  const movieList = JSON.parse(localStorage.getItem("favourites") || "[]");
+  const found = movieList.filter((m: MovieT) => m.id === +id!!);
+
   return (
     <Paper component="div" sx={styles.root}>
       <IconButton aria-label="go back">
         <ArrowBackIcon color="primary" fontSize="large" />
       </IconButton>
-
+      {found && (
+        <Avatar sx={styles.avatar}>
+          <FavoriteIcon />
+        </Avatar>
+      )}
       <Typography variant="h4" component="h3">
         {props.title}
         {"   "}
