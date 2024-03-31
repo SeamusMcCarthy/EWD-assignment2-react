@@ -19,12 +19,7 @@ const styles = {
   },
 };
 
-interface MoviePageProps {
-  movie: MovieT;
-  images: MovieImage[];
-}
-
-const MoviePage: React.FC<MoviePageProps> = (props) => {
+const MoviePage: React.FC = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState<MovieT>();
   const [images, setImages] = useState<MovieImage[]>([]);

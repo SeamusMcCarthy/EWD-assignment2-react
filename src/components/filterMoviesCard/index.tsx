@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, ChangeEvent } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -26,6 +26,7 @@ const styles = {
 };
 
 interface FilterMoviesCardProps {
+  onUserInput: (f: FilterOption, s: string) => void;
   titleFilter: string;
   genreFilter: string;
 }
@@ -55,7 +56,7 @@ const FilterMoviesCard: React.FC<FilterMoviesCardProps> = (props) => {
     value: string
   ) => {
     e.preventDefault();
-    // Completed later
+    props.onUserInput(type, value);
   };
 
   const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
