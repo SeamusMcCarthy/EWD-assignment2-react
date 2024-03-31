@@ -1,26 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react"; // replace existing react import
 import { useParams } from "react-router-dom";
 import MovieDetails from "../components/movieDetails";
+import { MovieT } from "../types/interfaces";
 import PageTemplate from "../components/templateMoviePage";
-import { getMovie } from "../api/tmdb-api";
+import useMovie from "../hooks/useMovie";
 
-const MovieDetailsPage = () => {
+const MovieDetailsPage: React.FC = () => {
   const { id } = useParams();
-  const [movie, setMovie] = useState(null);
+  const [movie] = useMovie(id ?? "");
 
-  useEffect(() => {
-    getMovie(id ?? "").then((movie) => {
-      setMovie(movie);
-    });
-  }, [id]);
-
-  console.log("Movie ", movie);
   return (
     <>
       {movie ? (
         <>
-          <PageTemplate movie={movie}>
-            <MovieDetails movie={movie} />
+          <PageTemplate movie={movie as MovieT}>
+            <MovieDetails {...(movie as MovieT)} />
           </PageTemplate>
         </>
       ) : (

@@ -32,7 +32,7 @@ const styles = {
 };
 
 const MovieDetails: React.FC<MovieT> = (props) => {
-  const { movie } = props;
+  const movie = props;
   const [drawerOpen, setDrawerOpen] = useState(false); // New
 
   return (
