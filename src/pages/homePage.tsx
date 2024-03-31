@@ -56,6 +56,13 @@ const MovieListPage: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const addToFavourites = (movieId: number) => {
+    const updatedMovies = movies.map((m: ListedMovie) =>
+      m.id === movieId ? { ...m, favourite: true } : m
+    );
+    setMovies(updatedMovies);
+  };
+
   return (
     <>
       <Grid container sx={styles.root}>
@@ -63,7 +70,10 @@ const MovieListPage: React.FC = () => {
           <Header title={"Home Page"} />
         </Grid>
         <Grid item container spacing={5}>
-          <MovieList movies={displayedMovies}></MovieList>
+          <MovieList
+            movies={displayedMovies}
+            selectFavourite={addToFavourites}
+          />
         </Grid>
       </Grid>
       <Fab

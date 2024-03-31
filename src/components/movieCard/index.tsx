@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -14,6 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import img from "../../images/film-poster-placeholder.png";
 import { BaseMovie } from "../../types/interfaces";
 import { Link } from "react-router-dom";
+import { Avatar } from "@mui/material";
 
 const styles = {
   card: { maxWidth: 345 },
@@ -23,10 +24,33 @@ const styles = {
   },
 };
 
-const MovieCard: React.FC<BaseMovie> = (props) => {
+interface MovieCardProps extends BaseMovie {
+  selectFavourite: (movieId: number) => void;
+} // Add this
+
+const MovieCard: React.FC<MovieCardProps> = (props) => {
+  const handleAddToFavourite = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    props.selectFavourite(props.id);
+  };
+
   return (
     <Card sx={styles.card}>
-      <CardHeader title={props.title} />
+      <CardHeader
+        avatar={
+          props.favourite ? (
+            <Avatar sx={styles.avatar}>
+              <FavoriteIcon />
+            </Avatar>
+          ) : null
+        }
+        title={
+          <Typography variant="h5" component="p">
+            {props.title}{" "}
+          </Typography>
+        }
+      />
+
       <CardMedia
         sx={styles.media}
         image={
@@ -52,7 +76,10 @@ const MovieCard: React.FC<BaseMovie> = (props) => {
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton
+          aria-label="add to favorites"
+          onClick={handleAddToFavourite}
+        >
           <FavoriteIcon color="primary" fontSize="large" />
         </IconButton>
         <Link to={`/movies/${props.id}`}>
