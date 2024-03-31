@@ -26,14 +26,16 @@ const styles = {
 const MovieHeader: React.FC<MovieT> = (props) => {
   const { id } = useParams();
   const movieList = JSON.parse(localStorage.getItem("favourites") || "[]");
+  console.log("MovieList ", movieList);
   const found = movieList.filter((m: MovieT) => m.id === +id!!);
+  console.log("Found ", found);
 
   return (
     <Paper component="div" sx={styles.root}>
       <IconButton aria-label="go back">
         <ArrowBackIcon color="primary" fontSize="large" />
       </IconButton>
-      {found && (
+      {found.length > 0 && (
         <Avatar sx={styles.avatar}>
           <FavoriteIcon />
         </Avatar>
