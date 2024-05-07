@@ -7,6 +7,7 @@ interface MovieContextInterface {
   removeFromFavourites: (movie: ListedMovie) => void;
   addReview: (movie: MovieT, review: Review) => void;
 }
+
 const initialContextState = {
   favourites: [],
   addToFavourites: (movie: ListedMovie) => {
