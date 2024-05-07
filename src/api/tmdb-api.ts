@@ -35,6 +35,25 @@ export const getMovie = (id: string) => {
     });
 };
 
+export const getProfile = (id: string) => {
+  return fetch(
+    `https://api.themoviedb.org/3/person/${id}?api_key=${
+      import.meta.env.VITE_TMDB_KEY
+    }`
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(
+          `Failed to get profile data. Response status: ${response.status}`
+        );
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
 export const getGenres = () => {
   return fetch(
     "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
@@ -71,6 +90,24 @@ export const getMovieImages = (id: string | number) => {
     });
 };
 
+export const getActorImages = (id: string | number) => {
+  return fetch(
+    `https://api.themoviedb.org/3/person/${id}/images?api_key=${
+      import.meta.env.VITE_TMDB_KEY
+    }`
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("failed to fetch images");
+      }
+      return response.json();
+    })
+    .then((json) => json.posters)
+    .catch((error) => {
+      throw error;
+    });
+};
+
 export const getMovieReviews = (id: string | number) => {
   return fetch(
     `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${
@@ -92,4 +129,39 @@ export const getUpcomingMovies = () => {
   )
     .then((res) => res.json())
     .then((json) => json.results);
+};
+
+export const getPopularMovies = () => {
+  return fetch(
+    `https://api.themoviedb.org/3/discover/movie?sort_by=popularity&api_key=${
+      import.meta.env.VITE_TMDB_KEY
+    }&language=en-US&include_adult=false&include_video=false&page=1`
+  )
+    .then((res) => res.json())
+    .then((json) => json.results);
+};
+
+export const getMovieCast = (id: string | number) => {
+  return fetch(
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${
+      import.meta.env.VITE_TMDB_KEY
+    }&language=en-US`
+  )
+    .then((res) => res.json())
+    .then((json) => {
+      return json.results;
+    });
+};
+
+export const getDiscography = (id: string | number) => {
+  return fetch(
+    `https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${
+      import.meta.env.VITE_TMDB_KEY
+    }&language=en-US&page=1`
+  )
+    .then((res) => res.json())
+    .then((json) => {
+      console.log("JSON : " + id + " " + json.cast);
+      return json.cast;
+    });
 };

@@ -1,4 +1,4 @@
-import React, { MouseEvent, useContext } from "react";
+import React, { useContext } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -26,7 +26,7 @@ const styles = {
 
 interface MovieListProps {
   movie: ListedMovie;
-  action: (m: ListedMovie) => void;
+  action: (m: ListedMovie) => React.ReactNode;
 }
 
 const MovieCard: React.FC<MovieListProps> = (props) => {
@@ -34,11 +34,6 @@ const MovieCard: React.FC<MovieListProps> = (props) => {
   const { favourites } = useContext(MoviesContext);
 
   if (favourites.find((id) => id === movie.id)) movie.favourite = true;
-
-  // const handleAddToFavourite = (e: MouseEvent<HTMLButtonElement>) => {
-  //   e.preventDefault();
-  //   addToFavourites(movie);
-  // };
 
   return (
     <Card sx={styles.card}>
