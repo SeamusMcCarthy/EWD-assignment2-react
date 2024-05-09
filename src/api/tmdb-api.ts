@@ -147,7 +147,9 @@ export const getMovieCast = (id: string | number) => {
       import.meta.env.VITE_TMDB_KEY
     }&language=en-US`
   )
-    .then((res) => res.json())
+    .then((res) => {
+      return res.json();
+    })
     .then((json) => {
       return json.results;
     });
@@ -164,4 +166,24 @@ export const getDiscography = (id: string | number) => {
       console.log("JSON : " + id + " " + json.cast);
       return json.cast;
     });
+};
+
+export const awsLogin = (id: string, password: string) => {
+  const data = {
+    username: id,
+    password,
+  };
+  return fetch(
+    "https://xebjoxe2c9.execute-api.eu-west-1.amazonaws.com/prod/auth/signin",
+    {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*",
+      },
+    }
+  ).then((response) => {
+    return response.json();
+  });
 };

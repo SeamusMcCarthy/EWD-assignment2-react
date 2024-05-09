@@ -81,3 +81,8 @@ export interface Review {
   rating: number;
   movieId: number;
 }
+
+export interface LoginDetails {
+  userName: string;
+  password: string;
+}

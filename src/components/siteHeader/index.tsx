@@ -11,6 +11,7 @@ import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useAuth } from "../../contexts/authContext";
 
 const styles = {
   title: {
@@ -25,19 +26,34 @@ const styles = {
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader: React.FC = () => {
+  const context = useAuth();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const open = Boolean(anchorEl);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
+  type navLink = {
+    label: string;
+    path: string;
+  };
+  let menuOptions: navLink[];
 
-  const menuOptions = [
-    { label: "Home", path: "/" },
-    { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Favorites", path: "/movies/favourites" },
-    { label: "Option 3", path: "/" },
-    { label: "Option 4", path: "/" },
-  ];
+  if (context.token) {
+    menuOptions = [
+      { label: "Home", path: "/" },
+      { label: "Upcoming", path: "/movies/upcoming" },
+      { label: "Favorites", path: "/movies/favourites" },
+      { label: "Option 3", path: "/" },
+      { label: "Log out", path: "/logout" },
+    ];
+  } else {
+    menuOptions = [
+      { label: "Home", path: "/" },
+      { label: "Upcoming", path: "/movies/upcoming" },
+      { label: "Favorites", path: "/movies/favourites" },
+      { label: "Log in", path: "/login" },
+    ];
+  }
 
   const handleMenuSelect = (pageURL: string) => {
     navigate(pageURL);
