@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { getMovies } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
@@ -10,7 +10,6 @@ import { DiscoverMovies, ListedMovie } from "../types/interfaces";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
-import { AuthContext } from "../contexts/authContext";
 
 const titleFiltering = {
   name: "title",
@@ -24,14 +23,6 @@ const genreFiltering = {
 };
 
 const HomePage: React.FC = () => {
-  const context = useContext(AuthContext);
-
-  useEffect(() => {
-    // context.login("user123", "passwA!1");
-
-    console.log("Context ", context.user, context.token);
-  }, []);
-
   const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>(
     "discover",
     getMovies

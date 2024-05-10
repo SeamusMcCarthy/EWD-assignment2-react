@@ -50,7 +50,6 @@ const ReviewForm: React.FC<MovieT> = (props) => {
     review.rating = rating;
     context.addReview(props, review);
     setOpen(true); // NEW
-    // console.log(review);
   };
 
   return (

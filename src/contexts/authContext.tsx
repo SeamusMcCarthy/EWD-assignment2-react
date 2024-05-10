@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import { awsLogin } from "../api/tmdb-api";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 interface AuthContextInterface {
   user: string;
-  token: string;
+  token: string | null;
   login: (userName: string, password: string) => void;
   logout: () => void;
 }
@@ -28,18 +28,17 @@ export const AuthContext =
 
 const AuthContextProvider: React.FC<React.PropsWithChildren> = (props) => {
   const [user, setUser] = useState<string>("");
-  const [token, setToken] = useState<string>("");
+  const [token, setToken] = useState<string | null>(null);
   const [error, setError] = useState<boolean>(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  async function login(userName: string, password: string) {
-    return await awsLogin(userName, password)
+  function login(userName: string, password: string) {
+    return awsLogin(userName, password)
       .then((json) => {
-        // console.log("JSON object ", json);
         if (json.token) {
           setUser(userName);
           setToken(json.token);
-          navigate("/");
+          localStorage.setItem("token", json.token);
         } else {
           setError(true);
         }
@@ -51,8 +50,8 @@ const AuthContextProvider: React.FC<React.PropsWithChildren> = (props) => {
 
   function logout() {
     setUser("");
-    setToken("");
-    navigate("/");
+    setToken(null);
+    localStorage.removeItem("token");
   }
 
   const value = {

@@ -54,6 +54,11 @@ export interface MovieListPageTemplateProps {
   action: (m: ListedMovie) => React.ReactNode;
 }
 
+export interface PlaylistPageTemplateProps {
+  playlists: Playlist[];
+  title: string;
+}
+
 export interface Review {
   id: string;
   content: string;
@@ -85,4 +90,14 @@ export interface Review {
 export interface LoginDetails {
   userName: string;
   password: string;
+}
+
+export interface PlaylistEntry {
+  playlistName: string;
+  movieId: number;
+}
+
+export interface Playlist {
+  userName: string;
+  playlistName: string;
 }

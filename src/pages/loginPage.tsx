@@ -1,8 +1,4 @@
 import React, { useRef, useState } from "react";
-// import CardActions from "@mui/material/CardActions";
-// import CardContent from "@mui/material/CardContent";
-// import CardMedia from "@mui/material/CardMedia";
-// import CardHeader from "@mui/material/CardHeader";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
 import {
@@ -37,18 +33,15 @@ const LoginPage: React.FC = () => {
   } = useForm<LoginDetails>(defaultValues);
 
   const context = useAuth();
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  //   const [open, setOpen] = useState(false);
-  //   const navigate = useNavigate();
 
-  //   const handleSnackClose = () => {
-  //     setOpen(false);
-  //     navigate("/movies/favourites");
-  //   };
-
-  const onSubmit: SubmitHandler<LoginDetails> = (login) => {
-    context.login(login.userName, login.password);
+  const onSubmit: SubmitHandler<LoginDetails> = async (login) => {
+    await context.login(login.userName, login.password);
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
   };
 
   return (
@@ -61,7 +54,10 @@ const LoginPage: React.FC = () => {
         <Controller
           name="userName"
           control={control}
-          rules={{ required: "Name is required" }}
+          rules={{
+            required: "Name is required",
+            minLength: { value: 6, message: "User name is too short" },
+          }}
           defaultValue=""
           render={({ field: { onChange, value } }) => (
             <TextField
@@ -100,7 +96,6 @@ const LoginPage: React.FC = () => {
               value={value}
               id="password"
               label="Password"
-              autoFocus
             />
           )}
         />
@@ -116,6 +111,7 @@ const LoginPage: React.FC = () => {
             variant="contained"
             color="primary"
             sx={styles.submit}
+            disabled={errors.password || errors.userName ? true : false}
           >
             Submit
           </Button>

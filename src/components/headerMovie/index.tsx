@@ -26,9 +26,7 @@ const styles = {
 const MovieHeader: React.FC<MovieT> = (props) => {
   const { id } = useParams();
   const movieList = JSON.parse(localStorage.getItem("favourites") || "[]");
-  console.log("MovieList ", movieList);
   const found = movieList.filter((m: MovieT) => m.id === +id!!);
-  console.log("Found ", found);
   const navigate = useNavigate();
 
   return (

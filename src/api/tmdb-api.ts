@@ -116,7 +116,6 @@ export const getMovieReviews = (id: string | number) => {
   )
     .then((res) => res.json())
     .then((json) => {
-      // console.log(json.results);
       return json.results;
     });
 };
@@ -163,7 +162,6 @@ export const getDiscography = (id: string | number) => {
   )
     .then((res) => res.json())
     .then((json) => {
-      console.log("JSON : " + id + " " + json.cast);
       return json.cast;
     });
 };
@@ -186,4 +184,48 @@ export const awsLogin = (id: string, password: string) => {
   ).then((response) => {
     return response.json();
   });
+};
+
+export const getPlaylists = (username: string, token: string) => {
+  return fetch(
+    `https://i28i9cj6v0.execute-api.eu-west-1.amazonaws.com/prod/users/${username}/playlists`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*",
+        Authorization: `Bearer ${token}`,
+        "Set-Cookie": `token=${token}`,
+        cookie: `token=${token}`,
+      },
+    }
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((json) => {
+      return json.data;
+    });
+};
+
+export const getPlaylistEntries = (playlistName: string, token: string) => {
+  return fetch(
+    `https://i28i9cj6v0.execute-api.eu-west-1.amazonaws.com/prod/playlists/${playlistName}/entries`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*",
+        Authorization: `Bearer ${token}`,
+        "Set-Cookie": `token=${token}`,
+        cookie: `token=${token}`,
+      },
+    }
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((json) => {
+      return json.data;
+    });
 };

@@ -20,13 +20,6 @@ const UpcomingMoviesPage: React.FC = () => {
   const [movies, setMovies] = useState<ListedMovie[]>([]);
   const favourites = movies.filter((m) => m.favourite);
   localStorage.setItem("favourites", JSON.stringify(favourites));
-  // New function
-  // const addToFavourites = (movieId: number) => {
-  //   const updatedMovies = movies.map((m: ListedMovie) =>
-  //     m.id === movieId ? { ...m, favourite: true } : m
-  //   );
-  //   setMovies(updatedMovies);
-  // };
 
   useEffect(() => {
     getUpcomingMovies().then((movies) => {
@@ -39,7 +32,6 @@ const UpcomingMoviesPage: React.FC = () => {
     <PageTemplate
       title="Upcoming Movies"
       movies={movies}
-      // selectFavourite={addToFavourites}
       action={(movie: ListedMovie) => {
         return <AddToFavouritesIcon {...movie} />;
       }}

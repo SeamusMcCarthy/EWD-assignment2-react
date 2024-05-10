@@ -42,15 +42,15 @@ const SiteHeader: React.FC = () => {
     menuOptions = [
       { label: "Home", path: "/" },
       { label: "Upcoming", path: "/movies/upcoming" },
-      { label: "Favorites", path: "/movies/favourites" },
-      { label: "Option 3", path: "/" },
+      { label: "Favourites", path: "/movies/favourites" },
+      { label: "Playlists", path: "/playlists" },
       { label: "Log out", path: "/logout" },
     ];
   } else {
     menuOptions = [
       { label: "Home", path: "/" },
       { label: "Upcoming", path: "/movies/upcoming" },
-      { label: "Favorites", path: "/movies/favourites" },
+      { label: "Favourites", path: "/movies/favourites" },
       { label: "Log in", path: "/login" },
     ];
   }
