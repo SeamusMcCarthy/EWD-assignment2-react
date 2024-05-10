@@ -72,7 +72,7 @@ export const getGenres = () => {
     });
 };
 
-export const getMovieImages = (id: string | number) => {
+export const getMovieImages = (id: number) => {
   return fetch(
     `https://api.themoviedb.org/3/movie/${id}/images?api_key=${
       import.meta.env.VITE_TMDB_KEY
@@ -150,7 +150,8 @@ export const getMovieCast = (id: string | number) => {
       return res.json();
     })
     .then((json) => {
-      return json.results;
+      console.log(json.cast);
+      return json.cast;
     });
 };
 

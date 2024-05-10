@@ -83,6 +83,16 @@ const MovieCard: React.FC<MovieListProps> = (props) => {
             More Info ...
           </Button>
         </Link>
+        <Link to={`/movies/${movie.id}/cast`}>
+          <Button
+            sx={{ marginLeft: "3px" }}
+            variant="outlined"
+            size="medium"
+            color="primary"
+          >
+            Cast
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );
