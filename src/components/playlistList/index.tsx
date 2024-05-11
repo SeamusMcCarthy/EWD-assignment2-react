@@ -52,6 +52,16 @@ const PlaylistList: React.FC<PlaylistListProps> = (props) => {
               More Info ...
             </Button>
           </Link>
+          <Link to={`/playlists/${m.playlistName}/add`}>
+            <Button
+              sx={{ marginLeft: "3px" }}
+              variant="outlined"
+              size="medium"
+              color="primary"
+            >
+              Add Entries
+            </Button>
+          </Link>
         </CardActions>
       </Card>
     </Grid>

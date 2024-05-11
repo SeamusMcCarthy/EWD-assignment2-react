@@ -209,6 +209,37 @@ export const getPlaylists = (username: string, token: string) => {
     });
 };
 
+export const addPlaylist = (
+  userName: string,
+  playlistName: string,
+  token: string
+) => {
+  const data = {
+    userName,
+    playlistName,
+  };
+  return fetch(
+    `https://i28i9cj6v0.execute-api.eu-west-1.amazonaws.com/prod/users/${userName}/playlists`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*",
+        Authorization: `Bearer ${token}`,
+        "Set-Cookie": `token=${token}`,
+        cookie: `token=${token}`,
+      },
+      body: JSON.stringify(data),
+    }
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((json) => {
+      return json.data;
+    });
+};
+
 export const getPlaylistEntries = (playlistName: string, token: string) => {
   return fetch(
     `https://i28i9cj6v0.execute-api.eu-west-1.amazonaws.com/prod/playlists/${playlistName}/entries`,
