@@ -28,7 +28,7 @@ const HomePage: React.FC = () => {
     getMovies
   );
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
-    [],
+    // [],
     [titleFiltering, genreFiltering]
   );
 

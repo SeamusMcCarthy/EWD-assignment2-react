@@ -1,32 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
-import { ListedMovie, MovieT, PlaylistEntry } from "../types/interfaces";
-import {
-  getPlaylistEntries,
-  getUpcomingMovies,
-  getMovie,
-} from "../api/tmdb-api";
-import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
-import { useParams } from "react-router-dom";
-import { useAuth } from "../contexts/authContext";
+import { MovieT } from "../types/interfaces";
+import { getMovie } from "../api/tmdb-api";
 import { useQueries } from "react-query";
 import Spinner from "../components/spinner";
 import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, { titleFilter } from "../components/movieFilterUI";
 import WriteReview from "../components/cardIcons/writeReview";
 import { PlaylistContext } from "../contexts/playlistContext";
-
-const styles = {
-  root: {
-    padding: "20px",
-  },
-  fab: {
-    marginTop: 8,
-    position: "fixed",
-    top: 2,
-    right: 2,
-  },
-};
 
 const titleFiltering = {
   name: "title",
@@ -48,7 +29,7 @@ export const genreFiltering = {
 
 const PlaylistMoviesPage: React.FC = () => {
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
-    [],
+    // [],
     [titleFiltering, genreFiltering]
   );
 

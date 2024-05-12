@@ -1,3 +1,5 @@
+import { APIConfig } from "../config";
+
 export const getMovies = () => {
   return fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${
@@ -171,35 +173,29 @@ export const awsLogin = (id: string, password: string) => {
     username: id,
     password,
   };
-  return fetch(
-    "https://xebjoxe2c9.execute-api.eu-west-1.amazonaws.com/prod/auth/signin",
-    {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*",
-      },
-    }
-  ).then((response) => {
+  return fetch(`${APIConfig.API.endpoints[1]}auth/signin`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "*",
+    },
+  }).then((response) => {
     return response.json();
   });
 };
 
 export const getPlaylists = (username: string, token: string) => {
-  return fetch(
-    `https://i28i9cj6v0.execute-api.eu-west-1.amazonaws.com/prod/users/${username}/playlists`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*",
-        Authorization: `Bearer ${token}`,
-        "Set-Cookie": `token=${token}`,
-        cookie: `token=${token}`,
-      },
-    }
-  )
+  return fetch(`${APIConfig.API.endpoints[0]}users/${username}/playlists`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "*",
+      Authorization: `Bearer ${token}`,
+      "Set-Cookie": `token=${token}`,
+      cookie: `token=${token}`,
+    },
+  })
     .then((response) => {
       return response.json();
     })
@@ -217,20 +213,17 @@ export const addPlaylist = (
     userName,
     playlistName,
   };
-  return fetch(
-    `https://i28i9cj6v0.execute-api.eu-west-1.amazonaws.com/prod/users/${userName}/playlists`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*",
-        Authorization: `Bearer ${token}`,
-        "Set-Cookie": `token=${token}`,
-        cookie: `token=${token}`,
-      },
-      body: JSON.stringify(data),
-    }
-  )
+  return fetch(`${APIConfig.API.endpoints[0]}users/${userName}/playlists`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "*",
+      Authorization: `Bearer ${token}`,
+      "Set-Cookie": `token=${token}`,
+      cookie: `token=${token}`,
+    },
+    body: JSON.stringify(data),
+  })
     .then((response) => {
       return response.json();
     })
@@ -249,7 +242,7 @@ export const addPlaylistEntry = (
     movieId,
   };
   return fetch(
-    `https://i28i9cj6v0.execute-api.eu-west-1.amazonaws.com/prod/playlists/${playlistName}/entries`,
+    `${APIConfig.API.endpoints[0]}playlists/${playlistName}/entries`,
     {
       method: "POST",
       headers: {
@@ -272,7 +265,7 @@ export const addPlaylistEntry = (
 
 export const getPlaylistEntries = (playlistName: string, token: string) => {
   return fetch(
-    `https://i28i9cj6v0.execute-api.eu-west-1.amazonaws.com/prod/playlists/${playlistName}/entries`,
+    `${APIConfig.API.endpoints[0]}playlists/${playlistName}/entries`,
     {
       method: "GET",
       headers: {

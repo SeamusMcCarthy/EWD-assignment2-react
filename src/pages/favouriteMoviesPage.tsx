@@ -32,7 +32,7 @@ export const genreFiltering = {
 const FavouriteMoviesPage: React.FC = () => {
   const { favourites: movieIds } = useContext(MoviesContext);
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
-    [],
+    // [],
     [titleFiltering, genreFiltering]
   );
 
@@ -54,7 +54,6 @@ const FavouriteMoviesPage: React.FC = () => {
 
   const allFavourites = favouriteMovieQueries.map((q) => q.data);
   const displayMovies = allFavourites ? filterFunction(allFavourites) : [];
-  const toDo = () => true;
 
   const changeFilterValues = (type: string, value: string) => {
     const changedFilter = { name: type, value: value };

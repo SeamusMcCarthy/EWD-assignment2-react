@@ -1,23 +1,7 @@
 import React from "react";
 import MovieHeader from "../headerMovie";
-import { useQuery } from "react-query";
-import Spinner from "../spinner";
-import { MovieImage, MovieT } from "../../types/interfaces";
-import { getMovieImages } from "../../api/tmdb-api";
-import { Grid, ImageList, ImageListItem } from "@mui/material";
-// import styles from "../../pages/styles";
-
-const styles = {
-  gridListRoot: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-  },
-  gridListTile: {
-    width: 450,
-    height: "100vh",
-  },
-};
+import { MovieT } from "../../types/interfaces";
+import { Grid } from "@mui/material";
 
 interface TemplateMoviePageProps {
   movie: MovieT;

@@ -9,7 +9,7 @@ import { addPlaylistEntry, getPlaylists } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 
-const AddPlaylistEntryPage: React.FC = (props) => {
+const AddPlaylistEntryPage: React.FC = () => {
   const location = useLocation();
   const { movieId } = location.state;
   const context = useAuth();

@@ -1,19 +1,7 @@
-import React, { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
-import {
-  Alert,
-  Box,
-  Button,
-  //   Card,
-  //   Container,
-  //   FormControl,
-  //   FormLabel,
-  //   Input,
-  Snackbar,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { LoginDetails } from "../types/interfaces";
 import styles from "./styles";
@@ -34,8 +22,6 @@ const LoginPage: React.FC = () => {
 
   const context = useAuth();
   const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const onSubmit: SubmitHandler<LoginDetails> = async (login) => {
     await context.login(login.userName, login.password);

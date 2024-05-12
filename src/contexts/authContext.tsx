@@ -14,7 +14,7 @@ const initialContextState = {
   token: "",
   error: "",
   login: (userName: string, password: string) => {
-    userName;
+    userName + password;
   },
   logout: () => {},
 };
@@ -29,22 +29,15 @@ export const AuthContext =
 const AuthContextProvider: React.FC<React.PropsWithChildren> = (props) => {
   const [user, setUser] = useState<string>("");
   const [token, setToken] = useState<string | null>(null);
-  const [error, setError] = useState<boolean>(false);
 
   function login(userName: string, password: string) {
-    return awsLogin(userName, password)
-      .then((json) => {
-        if (json.token) {
-          setUser(userName);
-          setToken(json.token);
-          localStorage.setItem("token", json.token);
-        } else {
-          setError(true);
-        }
-      })
-      .catch(() => {
-        setError(true);
-      });
+    return awsLogin(userName, password).then((json) => {
+      if (json.token) {
+        setUser(userName);
+        setToken(json.token);
+        localStorage.setItem("token", json.token);
+      }
+    });
   }
 
   function logout() {

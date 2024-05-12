@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
 import { Box, Button, TextField, Typography } from "@mui/material";
@@ -23,8 +23,6 @@ const AddPlaylistPage: React.FC = () => {
   } = useForm<Playlist>(defaultValues);
 
   const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const onSubmit: SubmitHandler<Playlist> = async (playlist) => {
     await addPlaylist(playlist.userName, playlist.playlistName, context.token!);

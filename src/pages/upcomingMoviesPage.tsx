@@ -4,18 +4,6 @@ import { ListedMovie } from "../types/interfaces";
 import { getUpcomingMovies } from "../api/tmdb-api";
 import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 
-const styles = {
-  root: {
-    padding: "20px",
-  },
-  fab: {
-    marginTop: 8,
-    position: "fixed",
-    top: 2,
-    right: 2,
-  },
-};
-
 const UpcomingMoviesPage: React.FC = () => {
   const [movies, setMovies] = useState<ListedMovie[]>([]);
   const favourites = movies.filter((m) => m.favourite);
