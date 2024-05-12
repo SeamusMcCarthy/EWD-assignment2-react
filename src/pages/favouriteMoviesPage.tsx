@@ -9,6 +9,7 @@ import MovieFilterUI, { titleFilter } from "../components/movieFilterUI";
 import { MovieT } from "../types/interfaces";
 import RemoveFromFavourites from "../components/cardIcons/removeFromFavourites";
 import WriteReview from "../components/cardIcons/writeReview";
+import AddToPlaylistIcon from "../components/cardIcons/addToPlaylist";
 
 const titleFiltering = {
   name: "title",
@@ -74,6 +75,7 @@ const FavouriteMoviesPage: React.FC = () => {
             <>
               <RemoveFromFavourites {...movie} />
               <WriteReview {...movie} />
+              <AddToPlaylistIcon {...movie} />
             </>
           );
         }}

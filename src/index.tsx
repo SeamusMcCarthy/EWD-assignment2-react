@@ -18,6 +18,7 @@ import PlaylistMoviesPage from "./pages/playlistMoviesPage";
 import LogoutPage from "./pages/logoutPage";
 import MovieCastPage from "./pages/movieCastPage";
 import AddPlaylistPage from "./pages/addPlaylistPage";
+import AddPlaylistEntryPage from "./pages/addPlaylistEntryPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,11 +55,18 @@ function App() {
             {token && (
               <Route path="/playlists/add" element={<AddPlaylistPage />} />
             )}
-            <Route
-              path="/movies/favourites"
-              element={<FavouriteMoviesPage />}
-            />
-
+            {token && (
+              <Route
+                path="/movies/favourites"
+                element={<FavouriteMoviesPage />}
+              />
+            )}
+            {token && (
+              <Route
+                path="/playlists/entries/add"
+                element={<AddPlaylistEntryPage />}
+              />
+            )}
             <Route path="/movies/:id" element={<MoviePage />} />
             <Route path="/reviews/form" element={<AddMovieReviewPage />} />
             <Route path="/movies/:id/cast" element={<MovieCastPage />} />
