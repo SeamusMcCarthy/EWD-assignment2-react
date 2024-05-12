@@ -51,7 +51,6 @@ const SiteHeader: React.FC = () => {
     menuOptions = [
       { label: "Home", path: "/" },
       { label: "Upcoming", path: "/movies/upcoming" },
-      { label: "Favourites", path: "/movies/favourites" },
       { label: "Log in", path: "/login" },
     ];
   }
