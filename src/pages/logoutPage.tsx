@@ -1,8 +1,7 @@
-import React, { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
-import { Alert, Box, Button, Typography } from "@mui/material";
-import { LoginDetails } from "../types/interfaces";
+import { Box, Button, Typography } from "@mui/material";
 import styles from "./styles";
 
 const LogoutPage: React.FC = () => {

@@ -25,27 +25,29 @@ interface TemplateMoviePageProps {
 }
 
 const MovieCastPageTemplate: React.FC<TemplateMoviePageProps> = (props) => {
-  //   const classes = useStyles();
-  const { data, error, isLoading, isError } = useQuery<MovieImage[], Error>(
-    ["images", props.movie.id],
-    () => getMovieImages(props.movie.id)
-  );
+  // Remove images as I can't get Grid to behave when showing the cast cards as well.
+  //
+  //   const { data, error, isLoading, isError } = useQuery<MovieImage[], Error>(
+  //     ["images", props.movie.id],
+  //     () => getMovieImages(props.movie.id)
+  //   );
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  //   if (isLoading) {
+  //     return <Spinner />;
+  //   }
 
-  if (isError) {
-    return <h1>{error.message}</h1>;
-  }
-  const images = data as MovieImage[];
+  //   if (isError) {
+  //     return <h1>{error.message}</h1>;
+  //   }
+  //   const images = data as MovieImage[];
 
   return (
     <>
       <MovieHeader {...props.movie} />
 
       <Grid container spacing={5} style={{ padding: "15px" }}>
-        {/* <Grid item xs={2}>
+        {/* Remove images as I can't get Grid to behave when showing the cast cards as well.
+        <Grid item xs={2}>
           <div>
             <ImageList cols={1}>
               {images.map((image: MovieImage) => (

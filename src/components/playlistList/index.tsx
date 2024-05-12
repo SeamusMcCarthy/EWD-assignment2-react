@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Grid from "@mui/material/Grid";
 import { Playlist } from "../../types/interfaces";
 import {
@@ -7,20 +7,17 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  IconButton,
-  List,
-  ListItem,
-  ListItemText,
   Typography,
 } from "@mui/material";
-import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import { Link } from "react-router-dom";
+import { PlaylistContext } from "../../contexts/playlistContext";
 
 interface PlaylistListProps {
   playlists: Playlist[];
 }
 
 const PlaylistList: React.FC<PlaylistListProps> = (props) => {
+  const context = useContext(PlaylistContext);
   const styles = {
     card: { maxWidth: 345 },
     media: { height: 500 },
@@ -28,8 +25,6 @@ const PlaylistList: React.FC<PlaylistListProps> = (props) => {
       backgroundColor: "rgb(255, 0, 0)",
     },
   };
-
-  const playlists = props.playlists;
 
   let playlistCards = props.playlists.map((m) => (
     <Grid key={m.playlistName} item xs={12} sm={6} md={4} lg={3} xl={2}>
@@ -48,50 +43,21 @@ const PlaylistList: React.FC<PlaylistListProps> = (props) => {
         </CardContent>
         <CardActions disableSpacing>
           <Link to={`/playlists/${m.playlistName}`}>
-            <Button variant="outlined" size="medium" color="primary">
-              More Info ...
-            </Button>
-          </Link>
-          <Link to={`/playlists/${m.playlistName}/add`}>
             <Button
-              sx={{ marginLeft: "3px" }}
               variant="outlined"
               size="medium"
               color="primary"
+              onClick={() => {
+                context.updateEntries(m.playlistName);
+              }}
             >
-              Add Entries
+              More Info ...
             </Button>
           </Link>
         </CardActions>
       </Card>
     </Grid>
   ));
-  // <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-  //   <List
-  //     sx={{ margin: "50px 30px", width: "100%", bgcolor: "background.paper" }}
-  //   >
-  //     {playlists.map((value) => (
-  //       <ListItem
-  //         sx={{
-  //           borderRadius: "6%",
-  //           width: "100%",
-  //           bgcolor: "background.paper",
-  //           margin: "20px",
-  //         }}
-  //         key={value.playlistName}
-  //         disableGutters
-  //         secondaryAction={
-  //           <IconButton aria-label="comment">
-  //             <ZoomInIcon />
-  //           </IconButton>
-  //         }
-  //       >
-  //         <ListItemText primary={`${value.playlistName}`} />
-  //       </ListItem>
-  //     ))}
-  //   </List>
-  // </Grid>
-  // );
   return playlistCards;
 };
 

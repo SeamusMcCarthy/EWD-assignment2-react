@@ -1,16 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
-import {
-  // Alert,
-  Box,
-  Button,
-  MenuItem,
-  Select,
-  // Snackbar,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Playlist, PlaylistEntry } from "../types/interfaces";
 import styles from "./styles";
@@ -70,7 +61,7 @@ const AddPlaylistEntryPage: React.FC = (props) => {
   return (
     <Box component="div" sx={styles.root}>
       <Typography component="h2" variant="h3">
-        Add Playlist
+        Add Movie to Playlist
       </Typography>
 
       <form style={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -109,28 +100,18 @@ const AddPlaylistEntryPage: React.FC = (props) => {
           }}
           defaultValue=""
           render={({ field: { onChange, value } }) => (
-            // <TextField
-            // sx={{ width: "40ch" }}
-            // variant="outlined"
-            // margin="normal"
-            // required
-            // onChange={onChange}
-            // value={value}
-            // id="playlistName"
-            // label="Playlist name"
-            // />
-            <Select
+            <TextField
               sx={{ width: "40ch" }}
               variant="outlined"
-              // margin="normal"
               required
               onChange={onChange}
               value={value}
               id="playlistName"
               label="Playlist name"
+              select
             >
               {options}
-            </Select>
+            </TextField>
           )}
         />
         {errors.playlistName && (

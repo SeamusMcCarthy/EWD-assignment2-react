@@ -1,7 +1,7 @@
 import React from "react";
 import PageTemplate from "../components/templatePlaylistPage";
 // import { MoviesContext } from "../contexts/moviesContext";
-import { useQueries, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { getPlaylists } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
 

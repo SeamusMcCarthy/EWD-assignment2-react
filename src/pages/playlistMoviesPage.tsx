@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { ListedMovie, MovieT, PlaylistEntry } from "../types/interfaces";
 import {
@@ -14,6 +14,7 @@ import Spinner from "../components/spinner";
 import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, { titleFilter } from "../components/movieFilterUI";
 import WriteReview from "../components/cardIcons/writeReview";
+import { PlaylistContext } from "../contexts/playlistContext";
 
 const styles = {
   root: {
@@ -46,25 +47,14 @@ export const genreFiltering = {
 };
 
 const PlaylistMoviesPage: React.FC = () => {
-  const [ids, setIds] = useState<number[]>([]);
-  const [movies, setMovies] = useState<ListedMovie[]>([]);
-
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
     [titleFiltering, genreFiltering]
   );
-  const { playlistName } = useParams();
-  const context = useAuth();
-  useEffect(() => {
-    getPlaylistEntries(playlistName!, context.token!).then((entries) => {
-      entries.map((e: { movieId: number }) => {
-        setIds([...ids, e.movieId]);
-      });
-    });
-  }, []);
 
+  const playlistContext = useContext(PlaylistContext);
   const playlistMovieQueries = useQueries(
-    ids.map((movieId) => {
+    playlistContext.entries.map((movieId) => {
       return {
         queryKey: ["movie", movieId],
         queryFn: () => getMovie(movieId.toString()),

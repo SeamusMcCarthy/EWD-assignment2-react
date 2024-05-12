@@ -30,7 +30,6 @@ const AuthContextProvider: React.FC<React.PropsWithChildren> = (props) => {
   const [user, setUser] = useState<string>("");
   const [token, setToken] = useState<string | null>(null);
   const [error, setError] = useState<boolean>(false);
-  // const navigate = useNavigate();
 
   function login(userName: string, password: string) {
     return awsLogin(userName, password)

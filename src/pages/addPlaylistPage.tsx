@@ -1,21 +1,9 @@
-import React, { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
-import {
-  Alert,
-  Box,
-  Button,
-  //   Card,
-  //   Container,
-  //   FormControl,
-  //   FormLabel,
-  //   Input,
-  Snackbar,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { LoginDetails, Playlist } from "../types/interfaces";
+import { Playlist } from "../types/interfaces";
 import styles from "./styles";
 import { addPlaylist } from "../api/tmdb-api";
 
@@ -72,11 +60,6 @@ const AddPlaylistPage: React.FC = () => {
             />
           )}
         />
-        {/* {errors.userName && (
-          <Typography variant="h6" component="p">
-            {errors.userName.message}
-          </Typography>
-        )} */}
         <Controller
           name="playlistName"
           control={control}
